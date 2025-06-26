@@ -5,298 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Retiro - Inscrições 2025</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            min-height: 100vh;
-            color: white;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #000;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-
-        .header {
-            background: #000;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 2px solid #333;
-        }
-
-        .logo {
-            width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-            filter: brightness(1.1);
-        }
-
-        .logo-container {
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            color: #fff;
-            font-weight: 700;
-        }
-
-        .header .date {
-            font-size: 1.3em;
-            color: #ff6b35;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .header .subtitle {
-            font-size: 1.1em;
-            color: #ccc;
-        }
-
-        .form-container {
-            padding: 40px;
-            background: #111;
-        }
-
-        .counter {
-            text-align: center;
-            font-size: 1.4em;
-            margin-bottom: 30px;
-            padding: 15px;
-            background: #222;
-            border-radius: 10px;
-            border: 1px solid #333;
-        }
-
-        .counter-number {
-            color: #ff6b35;
-            font-weight: bold;
-            font-size: 1.5em;
-        }
-
-        .section-title {
-            color: #ff6b35;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin: 30px 0 20px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #333;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .conditional-field {
-            margin-top: 15px;
-            padding-left: 20px;
-            border-left: 3px solid #ff6b35;
-            display: none;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #fff;
-            font-size: 1.1em;
-        }
-
-        .required {
-            color: #ff6b35;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #333;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: #222;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        input[type="number"] {
-            text-transform: none;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #ff6b35;
-            background: #333;
-            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
-        }
-
-        input::placeholder {
-            color: #999;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23999' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 12px;
-            padding-right: 45px;
-        }
-
-        select option {
-            background: #222;
-            color: #fff;
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #ff6b35 0%, #ff8a5b 100%);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .success-message {
-            display: none;
-            background: #1a472a;
-            color: #4ade80;
-            border: 1px solid #16a34a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .info-box {
-            background: #1a1a2e;
-            border-left: 4px solid #ff6b35;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 4px;
-            color: #ccc;
-        }
-
-        .color-legend {
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-
-        .color-legend h4 {
-            color: #ff6b35;
-            margin-bottom: 10px;
-        }
-
-        .color-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .color-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.9em;
-        }
-
-        .color-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            border: 1px solid #555;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1a1a1a, #2d2d2d); min-height: 100vh; color: white; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #000; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; border: 1px solid #333; }
+        .header { background: #000; padding: 30px; text-align: center; border-bottom: 2px solid #333; }
+        .logo { width: 120px; height: 120px; margin: 0 auto 20px; background: #222; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; }
+        .header h1 { font-size: 2.2em; margin-bottom: 10px; color: #fff; font-weight: 700; }
+        .date { font-size: 1.3em; color: #ff6b35; font-weight: 600; margin-bottom: 5px; }
+        .subtitle { font-size: 1.1em; color: #ccc; }
+        .form-container { padding: 40px; background: #111; }
+        .counter { text-align: center; font-size: 1.4em; margin-bottom: 30px; padding: 15px; background: #222; border-radius: 10px; border: 1px solid #333; }
+        .counter-number { color: #ff6b35; font-weight: bold; font-size: 1.5em; }
+        .section-title { color: #ff6b35; font-size: 1.3em; font-weight: bold; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #333; }
+        .form-group { margin-bottom: 25px; }
+        .conditional-field { margin-top: 15px; padding-left: 20px; border-left: 3px solid #ff6b35; display: none; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #fff; font-size: 1.1em; }
+        .required { color: #ff6b35; }
+        input, select, textarea { width: 100%; padding: 15px; border: 2px solid #333; border-radius: 8px; font-size: 16px; transition: all 0.3s ease; background: #222; color: #fff; text-transform: uppercase; }
+        input[type="number"], input[type="tel"] { text-transform: none; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #ff6b35; background: #333; box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1); }
+        input::placeholder { color: #999; }
+        textarea { resize: vertical; min-height: 80px; }
+        select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23999' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>"); background-repeat: no-repeat; background-position: right 15px center; background-size: 12px; padding-right: 45px; }
+        select option { background: #222; color: #fff; }
+        .submit-btn { background: linear-gradient(45deg, #ff6b35 0%, #ff8a5b 100%); color: white; border: none; padding: 18px 40px; border-radius: 50px; font-size: 1.2em; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3); }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .success-message { display: none; background: #1a472a; color: #4ade80; border: 1px solid #16a34a; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        .info-box { background: #1a1a2e; border-left: 4px solid #ff6b35; padding: 15px; margin-bottom: 25px; border-radius: 4px; color: #ccc; }
+        .color-legend { background: #222; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #333; }
+        .color-legend h4 { color: #ff6b35; margin-bottom: 10px; }
+        .color-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .color-item { display: flex; align-items: center; gap: 5px; font-size: 0.9em; }
+        .color-dot { width: 12px; height: 12px; border-radius: 50%; border: 1px solid #555; }
         .color-dot.branca { background: #fff; }
         .color-dot.azul { background: #3b82f6; }
         .color-dot.amarela { background: #eab308; }
         .color-dot.vermelha { background: #ef4444; }
         .color-dot.verde { background: #22c55e; }
-
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-
-            .logo {
-                width: 120px;
-            }
+            .container { margin: 10px; }
+            .header { padding: 20px; }
+            .header h1 { font-size: 1.8em; }
+            .form-container { padding: 20px; }
+            .logo { width: 100px; height: 100px; font-size: 20px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo-container">
-                <svg width="150" height="150" viewBox="0 0 200 200" class="logo">
-                    <rect width="200" height="200" fill="#000" rx="20"/>
-                    <circle cx="100" cy="80" r="25" fill="none" stroke="#fff" stroke-width="3"/>
-                    <circle cx="100" cy="80" r="8" fill="#fff"/>
-                    <text x="100" y="130" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">ALVO</text>
-                    <text x="100" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#fff" text-anchor="middle" letter-spacing="2px">CHURCH</text>
-                </svg>
-            </div>
-            
-            <div class="date">
-                <div id="date-display">SELECIONE SEU GÊNERO</div>
-            </div>
+            <div class="logo">🎯 ALVO</div>
+            <div class="date" id="date-display">SELECIONE SEU GÊNERO</div>
             <h1>O RETIRO</h1>
             <div class="subtitle">VISÃO • MISSÃO • PRESSÃO</div>
         </div>
 
         <div class="form-container">
             <div class="counter">
-                📊 <span class="counter-number" id="inscricoes-count">15</span> pessoas já se inscreveram
+                📊 <span class="counter-number" id="inscricoes-count">0</span> pessoas já se inscreveram
             </div>
 
             <div class="info-box">
@@ -428,7 +195,7 @@
                 </div>
 
                 <!-- INFORMAÇÕES DE VÍNCULO COM ALVO -->
-                <div class="section-title">(o) Informações de vínculos</div>
+                <div class="section-title">🎯 Informações de vínculos</div>
 
                 <div class="form-group">
                     <div class="color-legend">
@@ -510,21 +277,10 @@
     </div>
 
     <script>
-        let inscricoes = [];
+        let inscricaoCount = 0;
 
-        inscricoes = Array(0).fill(null).map((_, i) => ({
-            id: i + 1,
-            nome: `Participante ${i + 1}`,
-            timestamp: new Date()
-        }));
-
-        function atualizarContador() {
-            const totalInscricoes = inscricoes.length;
-            const inscricoesCount = document.getElementById('inscricoes-count');
-            inscricoesCount.textContent = totalInscricoes;
-        }
-
-        function formatarWhatsApp(input) {
+        // Função para formatar WhatsApp
+        function formatWhatsApp(input) {
             let value = input.value.replace(/\D/g, '');
             if (value.length >= 11) {
                 value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
@@ -536,7 +292,8 @@
             input.value = value;
         }
 
-        function formatarValor(input) {
+        // Função para formatar valor
+        function formatValor(input) {
             let value = input.value.replace(/\D/g, '');
             if (value.length >= 3) {
                 value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
@@ -544,12 +301,13 @@
             input.value = value;
         }
 
+        // Função para validar valor mínimo
         function validarValorMinimo() {
             const pagamento = document.getElementById('pagamento').value;
             const valorInput = document.getElementById('valor-pago');
             const warning = document.getElementById('valor-warning');
             
-            if (pagamento === 'entrada-pre' && valorInput.value) {
+            if (pagamento === 'ENTRADA-PRÉ' && valorInput.value) {
                 const valor = parseFloat(valorInput.value.replace(',', '.'));
                 if (valor < 200) {
                     warning.style.display = 'block';
@@ -568,7 +326,7 @@
             const textarea = details.querySelector('textarea');
             
             select.addEventListener('change', function() {
-                if (this.value === 'sim') {
+                if (this.value === 'SIM') {
                     details.style.display = 'block';
                     textarea.required = true;
                 } else {
@@ -579,15 +337,15 @@
             });
         }
 
-        // Atualizar data baseada no gênero
+        // Atualizar data baseada no gênero - CORRIGIDO
         function atualizarDataRetiro() {
             const genero = document.getElementById('genero').value;
             const dateDisplay = document.getElementById('date-display');
             
-            if (genero === 'homem') {
+            if (genero === 'HOMEM') {
                 dateDisplay.textContent = 'HOMENS: 8, 9 E 10 DE AGOSTO';
                 dateDisplay.style.color = '#4ade80';
-            } else if (genero === 'mulher') {
+            } else if (genero === 'MULHER') {
                 dateDisplay.textContent = 'MULHERES: 15, 16 E 17 DE AGOSTO';
                 dateDisplay.style.color = '#ff6b9d';
             } else {
@@ -596,21 +354,7 @@
             }
         }
 
-        // Converter automaticamente para MAIÚSCULA
-        function converterParaMaiuscula(input) {
-            if (input.type !== 'number' && input.type !== 'tel') {
-                input.value = input.value.toUpperCase();
-            }
-        }
-
-        // Aplicar conversão para maiúscula em todos os campos de texto
-        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
-            input.addEventListener('input', function() {
-                converterParaMaiuscula(this);
-            });
-        });
-
-        // Configurar atualização de data baseada no gênero
+        // Event Listeners
         document.getElementById('genero').addEventListener('change', atualizarDataRetiro);
 
         // Configurar todos os campos condicionais
@@ -621,6 +365,7 @@
         setupConditionalField('alergias', 'alergias-detalhes');
         setupConditionalField('locomocao', 'locomocao-detalhes');
 
+        // Configurar pagamento
         document.getElementById('pagamento').addEventListener('change', function() {
             const valorGroup = document.getElementById('valor-group');
             const valorInput = document.getElementById('valor-pago');
@@ -629,9 +374,9 @@
                 valorGroup.style.display = 'block';
                 valorInput.required = true;
                 
-                if (this.value === 'entrada-pre') {
+                if (this.value === 'ENTRADA-PRÉ') {
                     valorInput.placeholder = '200,00';
-                } else if (this.value === 'pagar-diferenca') {
+                } else if (this.value === 'PAGAR DIFERENÇA') {
                     valorInput.placeholder = '320,00';
                 }
             } else {
@@ -643,36 +388,30 @@
         });
 
         document.getElementById('valor-pago').addEventListener('input', function() {
-            formatarValor(this);
+            formatValor(this);
             validarValorMinimo();
         });
 
         document.getElementById('whatsapp').addEventListener('input', function() {
-            formatarWhatsApp(this);
+            formatWhatsApp(this);
         });
 
+        // Converter para MAIÚSCULA
+        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                this.value = this.value.toUpperCase();
+            });
+        });
+
+        // Submit do formulário
         document.getElementById('inscricao-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const dados = Object.fromEntries(formData);
             
-            // Validações básicas
-            const camposObrigatorios = ['nome', 'genero', 'idade', 'whatsapp', 'comorbidade', 'gravida', 'medicacao', 'restricoes', 'alergias', 'locomocao', 'cor-rede', 'pagamento', 'forma-pagamento'];
-            
-            for (let campo of camposObrigatorios) {
-                if (!dados[campo]) {
-                    alert('Por favor, preencha todos os campos obrigatórios.');
-                    return;
-                }
-            }
-
-            if (dados.pagamento && !dados['valor-pago']) {
-                alert('Por favor, informe o valor que será pago.');
-                return;
-            }
-
-            if (dados.pagamento === 'entrada-pre') {
+            // Validação básica
+            if (dados.pagamento === 'ENTRADA-PRÉ') {
                 const valor = parseFloat(dados['valor-pago'].replace(',', '.'));
                 if (valor < 200) {
                     alert('O valor mínimo da pré-inscrição é R$ 200,00');
@@ -681,134 +420,75 @@
             }
 
             const submitBtn = document.getElementById('submit-btn');
-            const originalText = submitBtn.textContent;
-            
             submitBtn.textContent = 'Enviando...';
             submitBtn.disabled = true;
 
-            setTimeout(() => {
-                inscricoes.push({
-                    id: Date.now(),
-                    ...dados,
-                    timestamp: new Date()
-                });
-
-                document.getElementById('success-message').style.display = 'block';
-                
-                const nextSteps = document.getElementById('next-steps');
-                const valorPago = dados['valor-pago'] ? parseFloat(dados['valor-pago'].replace(',', '.')) : 0;
-                const saldoRestante = 520 - valorPago;
-                
-                if (dados.pagamento === 'entrada-pre') {
-                    nextSteps.innerHTML = `💰 Você pagará R$ ${dados['valor-pago']} como entrada. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp com os dados para pagamento!`;
-                } else if (dados.pagamento === 'pagar-diferenca') {
-                    nextSteps.innerHTML = `📅 Você pagará R$ ${dados['valor-pago']} como diferença. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp!`;
+            // Enviar para Google Sheets
+            const dadosSheet = {
+                nome: dados.nome,
+                genero: dados.genero,
+                idade: dados.idade,
+                whatsapp: dados.whatsapp,
+                comorbidade: dados.comorbidade,
+                comorbidadeQual: dados['comorbidade-qual'] || '',
+                gravida: dados.gravida,
+                gravidaObservacao: dados['gravida-observacao'] || '',
+                medicacao: dados.medicacao,
+                medicacaoQual: dados['medicacao-qual'] || '',
+                restricoes: dados.restricoes,
+                restricoesQuais: dados['restricoes-quais'] || '',
+                alergias: dados.alergias,
+                alergiasQuais: dados['alergias-quais'] || '',
+                locomocao: dados.locomocao,
+                locomocaoQual: dados['locomocao-qual'] || '',
+                corRede: dados['cor-rede'],
+                statusPagamento: dados.pagamento,
+                valorPago: dados['valor-pago'] || '',
+                formaPagamento: dados['forma-pagamento']
+            };
+            
+            const params = new URLSearchParams(dadosSheet);
+            const script = document.createElement('script');
+            script.src = `https://script.google.com/macros/s/AKfycbxaqiZOGNSOxrK7urm-pPoEfbyriFCT125U3abqQ120Nb3CFDJ1bXf8eB1irdQuWn7T/exec?${params.toString()}`;
+            document.head.appendChild(script);
+            
+            window.handleSheetResponse = function (data) {
+                if (data.success) {
+                    inscricaoCount++;
+                    document.getElementById('inscricoes-count').textContent = inscricaoCount;
+                    
+                    document.getElementById('success-message').style.display = 'block';
+                    
+                    const nextSteps = document.getElementById('next-steps');
+                    const valorPago = dados['valor-pago'] ? parseFloat(dados['valor-pago'].replace(',', '.')) : 0;
+                    const saldoRestante = 520 - valorPago;
+                    
+                    nextSteps.innerHTML = `💰 Você pagará R$ ${dados['valor-pago']} como entrada. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp!`;
+                    
+                    document.getElementById('inscricao-form').reset();
+                    document.querySelectorAll('.conditional-field').forEach(field => {
+                        field.style.display = 'none';
+                    });
+                    document.getElementById('valor-group').style.display = 'none';
+                    
+                    // Reset da data display
+                    document.getElementById('date-display').textContent = 'SELECIONE SEU GÊNERO';
+                    document.getElementById('date-display').style.color = '#ff6b35';
+                    
+                    document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
                 }
                 
-                this.reset();
-                
-                // Esconder todos os campos condicionais
-                document.querySelectorAll('.conditional-field').forEach(field => {
-                    field.style.display = 'none';
-                });
-                
-                atualizarContador();
-                submitBtn.textContent = originalText;
+                submitBtn.textContent = 'Confirmar Inscrição';
                 submitBtn.disabled = false;
-                document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
-
-              // INTEGRAÇÃO COM GOOGLE SHEETS
-                let contador = 1; // Altere esse valor pelo número real de inscrições
                 
-                const dadosSheet = {
-                  nome: dados.nome,
-                  genero: dados.genero,
-                  idade: dados.idade,
-                  whatsapp: dados.whatsapp,
-                  comorbidade: dados.comorbidade,
-                  comorbidadeQual: dados['comorbidade-qual'] || '',
-                  gravida: dados.gravida,
-                  gravidaObservacao: dados['gravidez-observacao'] || '',
-                  medicacao: dados.medicacao,
-                  medicacaoQual: dados['medicacao-qual'] || '',
-                  restricoes: dados.restricoes,
-                  restricoesQuais: dados['restricoes-quais'] || '',
-                  alergias: dados.alergias,
-                  alergiasQuais: dados['alergias-quais'] || '',
-                  locomocao: dados.locomocao,
-                  locomocaoQual: dados['locomocao-qual'] || '',
-                  corRede: dados['cor-rede'],
-                  statusPagamento: dados.pagamento,
-                  valorPago: dados['valor-pago'] || '',
-                  formaPagamento: dados['forma-pagamento']
-                };
-                
-                const params = new URLSearchParams(dadosSheet);
-                const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycbxaqiZOGNSOxrK7urm-pPoEfbyriFCT125U3abqQ120Nb3CFDJ1bXf8eB1irdQuWn7T/exec?${params.toString()}`;
-                document.head.appendChild(script);
-                
-                window.handleSheetResponse = function (data) {
-                  console.log('✅ Enviado para planilha Google Sheets:', data);
-                
-                  if (data.success) {
-                    contador += 1;
-                    document.querySelector('#contador').innerText = contador;
-                
-                    const msg = document.getElementById('mensagem-sucesso');
-                    if (msg) {
-                      msg.innerText = '✅ Pré-inscrição realizada com sucesso!';
-                      msg.style.color = 'green';
-                    }
-                  } else {
-                    const msg = document.getElementById('mensagem-sucesso');
-                    if (msg) {
-                      msg.innerText = '❌ Erro ao enviar: ' + data.message;
-                      msg.style.color = 'red';
-                    }
-                  }
-                
-                  if (script && script.parentNode) {
+                if (script && script.parentNode) {
                     document.head.removeChild(script);
-                  }
-                };
-
-
-                console.log('🔥 Nova Inscrição - O Retiro 2025:', {
-                    nome: dados.nome,
-                    genero: dados.genero,
-                    idade: dados.idade,
-                    whatsapp: dados.whatsapp,
-                    comorbidade: dados.comorbidade,
-                    gravida: dados.gravida,
-                    medicacao: dados.medicacao,
-                    restricoes: dados.restricoes,
-                    alergias: dados.alergias,
-                    locomocao: dados.locomocao,
-                    corRede: dados['cor-rede'],
-                    statusPagamento: dados.pagamento,
-                    valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
-                    formaPagamento: dados['forma-pagamento'],
-                    timestamp: new Date().toLocaleString('pt-BR'),
-                    valorTotal: 'R$ 520,00',
-                    saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
-                });
-
-            }, 1500);
+                }
+            };
         });
 
-        atualizarContador();
-
-        setInterval(() => {
-            if (Math.random() < 0.08) {
-                inscricoes.push({
-                    id: Date.now(),
-                    nome: `Novo Inscrito ${inscricoes.length + 1}`,
-                    timestamp: new Date()
-                });
-                atualizarContador();
-            }
-        }, 15000);
+        // Inicializar contador
+        document.getElementById('inscricoes-count').textContent = inscricaoCount;
     </script>
 </body>
 </html>
