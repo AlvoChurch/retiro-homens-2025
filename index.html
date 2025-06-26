@@ -743,7 +743,7 @@
 
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycbyQGsJ5Q098MURQBY510joGxwT7gc8IQPx493EuTyyDrWn0vuKD0lAubIvk0GdVimP5/exec?${params}&callback=handleSheetResponse`;
+                script.src = `https://script.google.com/macros/s/AKfycbxaqiZOGNSOxrK7urm-pPoEfbyriFCT125U3abqQ120Nb3CFDJ1bXf8eB1irdQuWn7T/exec`;
                 document.head.appendChild(script);
 
                 window.handleSheetResponse = function(data) {
