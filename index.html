@@ -567,16 +567,19 @@
                 formaPagamento: dados['forma-pagamento']
             };
 
-                // Enviar para Google Sheets via GET (sem CORS)
+               // Enviar para Google Sheets via GET (sem CORS)
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycbzn7SCpM0L-sNXfOoiF4n5s79SfecPDGo98WMrR30qtoTF3OxYow9RSrshovZqO-ZoB/exec`;
+                script.src = `https://script.google.com/macros/s/AKfycbzn7SCpM0L-sNXfOoiF4n5s79SfecPDGo98WMrR30qtoTF3OxYow9RSrshovZqO-ZoB/exec?${params}&callback=handleSheetResponse`;
                 document.head.appendChild(script);
                 
                 // Função para receber resposta
                 window.handleSheetResponse = function(data) {
                     console.log('Enviado para planilha:', data);
-                    document.head.removeChild(script);
+                    if (script.parentNode) {
+                        document.head.removeChild(script);
+                    }
+                };
         };
             
         // Log local também
