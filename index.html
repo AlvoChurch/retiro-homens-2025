@@ -523,7 +523,7 @@
                 submitBtn.disabled = false;
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
-                // ENVIAR PARA GOOGLE SHEETS - CÓDIGO CORRIGIDO
+                // INTEGRAÇÃO COM GOOGLE SHEETS - URL ATUALIZADA
                 const dadosSheet = {
                     nome: dados.nome,
                     whatsapp: dados.whatsapp,
@@ -536,11 +536,11 @@
 
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `script.src = `https://script.google.com/macros/s/AKfycbyQGsJ5Q098MURQBY510joGxwT7gc8IQPx493EuTyyDrWn0vuKD0lAubIvk0GdVimP5/exec?${params}&callback=handleSheetResponse`;`;
+                script.src = `https://script.google.com/macros/s/AKfycbyQGsJ5Q098MURQBY510joGxwT7gc8IQPx493EuTyyDrWn0vuKD0lAubIvk0GdVimP5/exec?${params}&callback=handleSheetResponse`;
                 document.head.appendChild(script);
 
                 window.handleSheetResponse = function(data) {
-                    console.log('✅ Enviado para planilha:', data);
+                    console.log('✅ Enviado para planilha Google Sheets:', data);
                     if (script && script.parentNode) {
                         document.head.removeChild(script);
                     }
