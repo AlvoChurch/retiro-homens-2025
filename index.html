@@ -556,7 +556,6 @@
                 // Scroll para o topo
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
-                // Dados para o organizador (console)
                // Enviar para Google Sheets
                 const dadosSheet = {
                 nome: dados.nome,
@@ -571,7 +570,7 @@
                 // Enviar para Google Sheets via GET (sem CORS)
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycby-qYR6KR0nkOtNa6ldsz5pMWSKRcnJ9Yl86LIh-T0N_nYE-EXrVhzz7K2guansWCUp/exec?${params}&callback=handleSheetResponse`;
+                script.src = `https://script.google.com/macros/s/AKfycbzn7SCpM0L-sNXfOoiF4n5s79SfecPDGo98WMrR30qtoTF3OxYow9RSrshovZqO-ZoB/exec`;
                 document.head.appendChild(script);
                 
                 // Função para receber resposta
