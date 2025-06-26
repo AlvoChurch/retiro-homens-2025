@@ -718,40 +718,62 @@
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
                 // INTEGRAÇÃO COM GOOGLE SHEETS
+              // INTEGRAÇÃO COM GOOGLE SHEETS
+                let contador = 31; // Altere esse valor pelo número real de inscrições
+                
                 const dadosSheet = {
-                    nome: dados.nome,
-                    genero: dados.genero,
-                    idade: dados.idade,
-                    whatsapp: dados.whatsapp,
-                    comorbidade: dados.comorbidade,
-                    comorbidadeQual: dados['comorbidade-qual'] || '',
-                    gravida: dados.gravida,
-                    gravidaObservacao: dados['gravida-observacao'] || '',
-                    medicacao: dados.medicacao,
-                    medicacaoQual: dados['medicacao-qual'] || '',
-                    restricoes: dados.restricoes,
-                    restricoesQuais: dados['restricoes-quais'] || '',
-                    alergias: dados.alergias,
-                    alergiasQuais: dados['alergias-quais'] || '',
-                    locomocao: dados.locomocao,
-                    locomocaoQual: dados['locomocao-qual'] || '',
-                    corRede: dados['cor-rede'],
-                    statusPagamento: dados.pagamento,
-                    valorPago: dados['valor-pago'] || '',
-                    formaPagamento: dados['forma-pagamento']
+                  nome: dados.nome,
+                  genero: dados.genero,
+                  idade: dados.idade,
+                  whatsapp: dados.whatsapp,
+                  comorbidade: dados.comorbidade,
+                  comorbidadeQual: dados['comorbidade-qual'] || '',
+                  gravida: dados.gravida,
+                  gravidaObservacao: dados['gravidez-observacao'] || '',
+                  medicacao: dados.medicacao,
+                  medicacaoQual: dados['medicacao-qual'] || '',
+                  restricoes: dados.restricoes,
+                  restricoesQuais: dados['restricoes-quais'] || '',
+                  alergias: dados.alergias,
+                  alergiasQuais: dados['alergias-quais'] || '',
+                  locomocao: dados.locomocao,
+                  locomocaoQual: dados['locomocao-qual'] || '',
+                  corRede: dados['cor-rede'],
+                  statusPagamento: dados.pagamento,
+                  valorPago: dados['valor-pago'] || '',
+                  formaPagamento: dados['forma-pagamento']
                 };
-
+                
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycbzadOz3ScOETgWiatBh3P_qDfP7oSynfDlB-B7ilnEgg-C2hEvCZ3dWK9uwSLBdMWXC/exec`;
+                script.src = `https://script.google.com/macros/s/AKfyc.../exec?${params.toString()}`;
                 document.head.appendChild(script);
-
-                window.handleSheetResponse = function(data) {
-                    console.log('✅ Enviado para planilha Google Sheets:', data);
-                    if (script && script.parentNode) {
-                        document.head.removeChild(script);
+                
+                window.handleSheetResponse = function (data) {
+                  console.log('✅ Enviado para planilha Google Sheets:', data);
+                
+                  if (data.success) {
+                    contador += 1;
+                    document.querySelector('#contador').innerText = contador;
+                
+                    const msg = document.getElementById('mensagem-sucesso');
+                    if (msg) {
+                      msg.innerText = '✅ Pré-inscrição realizada com sucesso!';
+                      msg.style.color = 'green';
                     }
+                  } else {
+                    const msg = document.getElementById('mensagem-sucesso');
+                    if (msg) {
+                      msg.innerText = '❌ Erro ao enviar: ' + data.message;
+                      msg.style.color = 'red';
+                    }
+                  }
+                
+                  if (script && script.parentNode) {
+                    document.head.removeChild(script);
+                  }
                 };
+
 
                 console.log('🔥 Nova Inscrição - O Retiro 2025:', {
                     nome: dados.nome,
