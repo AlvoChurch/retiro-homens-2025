@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Retiro dos Homens - Inscrições</title>
+    <title>O Retiro - Inscrições 2025</title>
     <style>
         * {
             margin: 0;
@@ -87,8 +87,24 @@
             font-size: 1.5em;
         }
 
+        .section-title {
+            color: #ff6b35;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
         .form-group {
             margin-bottom: 25px;
+        }
+
+        .conditional-field {
+            margin-top: 15px;
+            padding-left: 20px;
+            border-left: 3px solid #ff6b35;
+            display: none;
         }
 
         label {
@@ -112,6 +128,11 @@
             transition: all 0.3s ease;
             background: #222;
             color: #fff;
+            text-transform: uppercase;
+        }
+
+        input[type="number"] {
+            text-transform: none;
         }
 
         input:focus, select:focus, textarea:focus {
@@ -123,6 +144,11 @@
 
         input::placeholder {
             color: #999;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
         select {
@@ -261,14 +287,16 @@
                 </svg>
             </div>
             
-            <div class="date">8, 9 e 10 de Agosto</div>
-            <h1>O Retiro dos Homens</h1>
-            <div class="subtitle">Transformação • Comunhão • Propósito</div>
+            <div class="date">
+                <div id="date-display">SELECIONE SEU GÊNERO</div>
+            </div>
+            <h1>O RETIRO</h1>
+            <div class="subtitle">TRANSFORMAÇÃO • COMUNHÃO • PROPÓSITO</div>
         </div>
 
         <div class="form-container">
             <div class="counter">
-                📊 <span class="counter-number" id="inscricoes-count">12</span> homens já se inscreveram
+                📊 <span class="counter-number" id="inscricoes-count">15</span> pessoas já se inscreveram
             </div>
 
             <div class="info-box">
@@ -291,9 +319,26 @@
             </div>
 
             <form id="inscricao-form">
+                <!-- IDENTIFICAÇÃO E CONTATO -->
+                <div class="section-title">✅ Identificação e Contato</div>
+                
                 <div class="form-group">
                     <label for="nome">Nome Completo <span class="required">*</span></label>
-                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                    <input type="text" id="nome" name="nome" required placeholder="DIGITE SEU NOME COMPLETO">
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Gênero <span class="required">*</span></label>
+                    <select id="genero" name="genero" required>
+                        <option value="">Selecione seu gênero</option>
+                        <option value="homem">👨 Homem</option>
+                        <option value="mulher">👩 Mulher</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="idade">Idade <span class="required">*</span></label>
+                    <input type="number" id="idade" name="idade" required placeholder="DIGITE SUA IDADE" min="12" max="100">
                 </div>
 
                 <div class="form-group">
@@ -301,14 +346,89 @@
                     <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
                 </div>
 
+                <!-- INFORMAÇÕES DE SAÚDE E ACESSIBILIDADE -->
+                <div class="section-title">🏥 Informações de Saúde e Acessibilidade</div>
+
                 <div class="form-group">
-                    <label for="participacao">Vai Receber ou Servir? <span class="required">*</span></label>
-                    <select id="participacao" name="participacao" required>
+                    <label for="comorbidade">Possui alguma comorbidade? <span class="required">*</span></label>
+                    <select id="comorbidade" name="comorbidade" required>
                         <option value="">Selecione uma opção</option>
-                        <option value="receber">Vou Receber</option>
-                        <option value="servir">Vou Servir</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
                     </select>
+                    <div id="comorbidade-detalhes" class="conditional-field">
+                        <label for="comorbidade-qual">Qual comorbidade?</label>
+                        <textarea id="comorbidade-qual" name="comorbidade-qual" placeholder="DESCREVA A COMORBIDADE..."></textarea>
+                    </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="gravida">Está grávida? <span class="required">*</span></label>
+                    <select id="gravida" name="gravida" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
+                    </select>
+                    <div id="gravida-detalhes" class="conditional-field">
+                        <label for="gravida-observacao">Tem alguma observação sobre a gravidez?</label>
+                        <textarea id="gravida-observacao" name="gravida-observacao" placeholder="OBSERVAÇÕES SOBRE A GRAVIDEZ..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="medicacao">Usa medicação contínua? <span class="required">*</span></label>
+                    <select id="medicacao" name="medicacao" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
+                    </select>
+                    <div id="medicacao-detalhes" class="conditional-field">
+                        <label for="medicacao-qual">Qual medicação?</label>
+                        <textarea id="medicacao-qual" name="medicacao-qual" placeholder="DESCREVA AS MEDICAÇÕES..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="restricoes">Tem restrições alimentares? <span class="required">*</span></label>
+                    <select id="restricoes" name="restricoes" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
+                    </select>
+                    <div id="restricoes-detalhes" class="conditional-field">
+                        <label for="restricoes-quais">Quais restrições alimentares?</label>
+                        <textarea id="restricoes-quais" name="restricoes-quais" placeholder="DESCREVA AS RESTRIÇÕES ALIMENTARES..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="alergias">Tem alergias? <span class="required">*</span></label>
+                    <select id="alergias" name="alergias" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
+                    </select>
+                    <div id="alergias-detalhes" class="conditional-field">
+                        <label for="alergias-quais">Quais alergias?</label>
+                        <textarea id="alergias-quais" name="alergias-quais" placeholder="DESCREVA AS ALERGIAS..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="locomocao">Tem alguma limitação de locomoção? <span class="required">*</span></label>
+                    <select id="locomocao" name="locomocao" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">❌ Não</option>
+                        <option value="sim">✅ Sim</option>
+                    </select>
+                    <div id="locomocao-detalhes" class="conditional-field">
+                        <label for="locomocao-qual">Qual limitação de locomoção?</label>
+                        <textarea id="locomocao-qual" name="locomocao-qual" placeholder="DESCREVA A LIMITAÇÃO DE LOCOMOÇÃO..."></textarea>
+                    </div>
+                </div>
+
+                <!-- INFORMAÇÕES DA IGREJA -->
+                <div class="section-title">⛪ Informações da Igreja</div>
 
                 <div class="form-group">
                     <div class="color-legend">
@@ -347,6 +467,9 @@
                         <option value="verde">💚 Rede Verde</option>
                     </select>
                 </div>
+
+                <!-- INFORMAÇÕES DE PAGAMENTO -->
+                <div class="section-title">💰 Informações de Pagamento</div>
 
                 <div class="form-group">
                     <label for="pagamento">Status do Pagamento da Entrada <span class="required">*</span></label>
@@ -389,7 +512,7 @@
     <script>
         let inscricoes = [];
 
-        inscricoes = Array(12).fill(null).map((_, i) => ({
+        inscricoes = Array(15).fill(null).map((_, i) => ({
             id: i + 1,
             nome: `Participante ${i + 1}`,
             timestamp: new Date()
@@ -438,6 +561,66 @@
             }
         }
 
+        // Configurar campos condicionais
+        function setupConditionalField(selectId, detailsId) {
+            const select = document.getElementById(selectId);
+            const details = document.getElementById(detailsId);
+            const textarea = details.querySelector('textarea');
+            
+            select.addEventListener('change', function() {
+                if (this.value === 'sim') {
+                    details.style.display = 'block';
+                    textarea.required = true;
+                } else {
+                    details.style.display = 'none';
+                    textarea.required = false;
+                    textarea.value = '';
+                }
+            });
+        }
+
+        // Atualizar data baseada no gênero
+        function atualizarDataRetiro() {
+            const genero = document.getElementById('genero').value;
+            const dateDisplay = document.getElementById('date-display');
+            
+            if (genero === 'homem') {
+                dateDisplay.textContent = 'HOMENS: 8, 9 E 10 DE AGOSTO';
+                dateDisplay.style.color = '#4ade80';
+            } else if (genero === 'mulher') {
+                dateDisplay.textContent = 'MULHERES: 15, 16 E 17 DE AGOSTO';
+                dateDisplay.style.color = '#ff6b9d';
+            } else {
+                dateDisplay.textContent = 'SELECIONE SEU GÊNERO';
+                dateDisplay.style.color = '#ff6b35';
+            }
+        }
+
+        // Converter automaticamente para MAIÚSCULA
+        function converterParaMaiuscula(input) {
+            if (input.type !== 'number' && input.type !== 'tel') {
+                input.value = input.value.toUpperCase();
+            }
+        }
+
+        // Aplicar conversão para maiúscula em todos os campos de texto
+        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                converterParaMaiuscula(this);
+            });
+        });
+
+        // Configurar atualização de data baseada no gênero
+        document.getElementById('genero').addEventListener('change', atualizarDataRetiro);
+
+        // Configurar todos os campos condicionais
+        setupConditionalField('comorbidade', 'comorbidade-detalhes');
+        setupConditionalField('gravida', 'gravida-detalhes');
+        setupConditionalField('medicacao', 'medicacao-detalhes');
+        setupConditionalField('restricoes', 'restricoes-detalhes');
+        setupConditionalField('alergias', 'alergias-detalhes');
+        setupConditionalField('locomocao', 'locomocao-detalhes');
+
         document.getElementById('pagamento').addEventListener('change', function() {
             const valorGroup = document.getElementById('valor-group');
             const valorInput = document.getElementById('valor-pago');
@@ -474,9 +657,14 @@
             const formData = new FormData(this);
             const dados = Object.fromEntries(formData);
             
-            if (!dados.nome || !dados.whatsapp || !dados.participacao || !dados['cor-rede'] || !dados.pagamento || !dados['forma-pagamento']) {
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
+            // Validações básicas
+            const camposObrigatorios = ['nome', 'genero', 'idade', 'whatsapp', 'comorbidade', 'gravida', 'medicacao', 'restricoes', 'alergias', 'locomocao', 'cor-rede', 'pagamento', 'forma-pagamento'];
+            
+            for (let campo of camposObrigatorios) {
+                if (!dados[campo]) {
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
             }
 
             if (dados.pagamento && !dados['valor-pago']) {
@@ -518,16 +706,35 @@
                 }
                 
                 this.reset();
+                
+                // Esconder todos os campos condicionais
+                document.querySelectorAll('.conditional-field').forEach(field => {
+                    field.style.display = 'none';
+                });
+                
                 atualizarContador();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
-                // INTEGRAÇÃO COM GOOGLE SHEETS - URL ATUALIZADA
+                // INTEGRAÇÃO COM GOOGLE SHEETS
                 const dadosSheet = {
                     nome: dados.nome,
+                    genero: dados.genero,
+                    idade: dados.idade,
                     whatsapp: dados.whatsapp,
-                    participacao: dados.participacao,
+                    comorbidade: dados.comorbidade,
+                    comorbidadeQual: dados['comorbidade-qual'] || '',
+                    gravida: dados.gravida,
+                    gravidaObservacao: dados['gravida-observacao'] || '',
+                    medicacao: dados.medicacao,
+                    medicacaoQual: dados['medicacao-qual'] || '',
+                    restricoes: dados.restricoes,
+                    restricoesQuais: dados['restricoes-quais'] || '',
+                    alergias: dados.alergias,
+                    alergiasQuais: dados['alergias-quais'] || '',
+                    locomocao: dados.locomocao,
+                    locomocaoQual: dados['locomocao-qual'] || '',
                     corRede: dados['cor-rede'],
                     statusPagamento: dados.pagamento,
                     valorPago: dados['valor-pago'] || '',
@@ -546,10 +753,17 @@
                     }
                 };
 
-                console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
+                console.log('🔥 Nova Inscrição - O Retiro 2025:', {
                     nome: dados.nome,
+                    genero: dados.genero,
+                    idade: dados.idade,
                     whatsapp: dados.whatsapp,
-                    participacao: dados.participacao,
+                    comorbidade: dados.comorbidade,
+                    gravida: dados.gravida,
+                    medicacao: dados.medicacao,
+                    restricoes: dados.restricoes,
+                    alergias: dados.alergias,
+                    locomocao: dados.locomocao,
                     corRede: dados['cor-rede'],
                     statusPagamento: dados.pagamento,
                     valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
