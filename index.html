@@ -251,32 +251,15 @@
 <body>
     <div class="container">
         <div class="header">
-            <!-- LOGO ALVO CHURCH - SUBSTITUA PELO LINK DA SUA IMAGEM -->
             <div class="logo-container">
                 <svg width="150" height="150" viewBox="0 0 200 200" class="logo">
                     <rect width="200" height="200" fill="#000" rx="20"/>
-                    <!-- Círculo com ponto central (símbolo do alvo) -->
                     <circle cx="100" cy="80" r="25" fill="none" stroke="#fff" stroke-width="3"/>
                     <circle cx="100" cy="80" r="8" fill="#fff"/>
-                    <!-- Texto ALVO -->
                     <text x="100" y="130" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">ALVO</text>
-                    <!-- Texto CHURCH -->
                     <text x="100" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#fff" text-anchor="middle" letter-spacing="2px">CHURCH</text>
                 </svg>
             </div>
-            
-            <!-- 
-            ⚠️ IMPORTANTE: SUBSTITUA PELA SUA LOGO REAL!
-            
-            MÉTODO MAIS FÁCIL:
-            1. Faça upload da sua logo para https://imgur.com
-            2. Clique com botão direito na imagem → "Copiar endereço da imagem"
-            3. Substitua todo o bloco <div class="logo-container">...</div> acima por:
-               <img src="LINK_DA_SUA_IMAGEM_AQUI" alt="Alvo Church Logo" class="logo">
-            
-            EXEMPLO:
-            <img src="https://i.imgur.com/EXEMPLO123.png" alt="Alvo Church Logo" class="logo">
-            -->
             
             <div class="date">8, 9 e 10 de Agosto</div>
             <h1>O Retiro dos Homens</h1>
@@ -406,7 +389,6 @@
     <script>
         let inscricoes = [];
 
-        // Simular algumas inscrições já existentes
         inscricoes = Array(12).fill(null).map((_, i) => ({
             id: i + 1,
             nome: `Participante ${i + 1}`,
@@ -464,7 +446,6 @@
                 valorGroup.style.display = 'block';
                 valorInput.required = true;
                 
-                // Sugerir valor baseado na opção
                 if (this.value === 'entrada-pre') {
                     valorInput.placeholder = '200,00';
                 } else if (this.value === 'pagar-diferenca') {
@@ -493,19 +474,16 @@
             const formData = new FormData(this);
             const dados = Object.fromEntries(formData);
             
-            // Validações básicas
             if (!dados.nome || !dados.whatsapp || !dados.participacao || !dados['cor-rede'] || !dados.pagamento || !dados['forma-pagamento']) {
                 alert('Por favor, preencha todos os campos obrigatórios.');
                 return;
             }
 
-            // Validar valor quando necessário
             if (dados.pagamento && !dados['valor-pago']) {
                 alert('Por favor, informe o valor que será pago.');
                 return;
             }
 
-            // Validar valor mínimo para entrada de pré-inscrição
             if (dados.pagamento === 'entrada-pre') {
                 const valor = parseFloat(dados['valor-pago'].replace(',', '.'));
                 if (valor < 200) {
@@ -514,7 +492,6 @@
                 }
             }
 
-            // Simular envio
             const submitBtn = document.getElementById('submit-btn');
             const originalText = submitBtn.textContent;
             
@@ -522,17 +499,14 @@
             submitBtn.disabled = true;
 
             setTimeout(() => {
-                // Adicionar à lista
                 inscricoes.push({
                     id: Date.now(),
                     ...dados,
                     timestamp: new Date()
                 });
 
-                // Mostrar mensagem de sucesso
                 document.getElementById('success-message').style.display = 'block';
                 
-                // Instruções específicas baseadas no pagamento
                 const nextSteps = document.getElementById('next-steps');
                 const valorPago = dados['valor-pago'] ? parseFloat(dados['valor-pago'].replace(',', '.')) : 0;
                 const saldoRestante = 520 - valorPago;
@@ -543,66 +517,53 @@
                     nextSteps.innerHTML = `📅 Você pagará R$ ${dados['valor-pago']} como diferença. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp!`;
                 }
                 
-                // Limpar formulário
                 this.reset();
-                
-                // Atualizar contador
                 atualizarContador();
-                
-                // Restaurar botão
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
-
-                // Scroll para o topo
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
-               // Enviar para Google Sheets
+                // ENVIAR PARA GOOGLE SHEETS - CÓDIGO CORRIGIDO
                 const dadosSheet = {
-                nome: dados.nome,
-                whatsapp: dados.whatsapp,
-                participacao: dados.participacao,
-                corRede: dados['cor-rede'],
-                statusPagamento: dados.pagamento,
-                valorPago: dados['valor-pago'] || '',
-                formaPagamento: dados['forma-pagamento']
-            };
+                    nome: dados.nome,
+                    whatsapp: dados.whatsapp,
+                    participacao: dados.participacao,
+                    corRede: dados['cor-rede'],
+                    statusPagamento: dados.pagamento,
+                    valorPago: dados['valor-pago'] || '',
+                    formaPagamento: dados['forma-pagamento']
+                };
 
-               // Enviar para Google Sheets via GET (sem CORS)
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfycbzn7SCpM0L-sNXfOoiF4n5s79SfecPDGo98WMrR30qtoTF3OxYow9RSrshovZqO-ZoB/exec?${params}&callback=handleSheetResponse`;
+                script.src = `https://script.google.com/macros/s/AKfycbzULGOrM2aRV5eLyyVaMmIsJ2rKPjGxumJfJzVYsFWHIMRlQdkl2j8jYtMZ3i4bU1o/exec?${params}&callback=handleSheetResponse`;
                 document.head.appendChild(script);
-                
-                // Função para receber resposta
+
                 window.handleSheetResponse = function(data) {
-                    console.log('Enviado para planilha:', data);
-                    if (script.parentNode) {
+                    console.log('✅ Enviado para planilha:', data);
+                    if (script && script.parentNode) {
                         document.head.removeChild(script);
                     }
                 };
-        };
-            
-        // Log local também
-            console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
-                nome: dados.nome,
-                whatsapp: dados.whatsapp,
-                participacao: dados.participacao,
-                corRede: dados['cor-rede'],
-                statusPagamento: dados.pagamento,
-                valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
-                formaPagamento: dados['forma-pagamento'],
-                timestamp: new Date().toLocaleString('pt-BR'),
-                valorTotal: 'R$ 520,00',
-                saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
-        });
+
+                console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
+                    nome: dados.nome,
+                    whatsapp: dados.whatsapp,
+                    participacao: dados.participacao,
+                    corRede: dados['cor-rede'],
+                    statusPagamento: dados.pagamento,
+                    valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
+                    formaPagamento: dados['forma-pagamento'],
+                    timestamp: new Date().toLocaleString('pt-BR'),
+                    valorTotal: 'R$ 520,00',
+                    saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
+                });
 
             }, 1500);
         });
 
-        // Inicializar contador
         atualizarContador();
 
-        // Simular chegada de novas inscrições (para demonstração)
         setInterval(() => {
             if (Math.random() < 0.08) {
                 inscricoes.push({
