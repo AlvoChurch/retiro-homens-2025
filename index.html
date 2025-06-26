@@ -568,13 +568,17 @@
                 formaPagamento: dados['forma-pagamento']
             };
 
-            fetch('https://script.google.com/macros/s/AKfycby-qYR6KR0nkOtNa6ldsz5pMWSKRcnJ9Yl86LIh-T0N_nYE-EXrVhzz7K2guansWCUp/exec', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(dadosSheet)
-        }).then(response => response.json())
-            .then(data => console.log('Enviado para planilha:', data))
-            .catch(error => console.log('Erro:', error));
+                // Enviar para Google Sheets via GET (sem CORS)
+                const params = new URLSearchParams(dadosSheet);
+                const script = document.createElement('script');
+                script.src = `https://script.google.com/macros/s/AKfycby-qYR6KR0nkOtNa6ldsz5pMWSKRcnJ9Yl86LIh-T0N_nYE-EXrVhzz7K2guansWCUp/exec?${params}&callback=handleSheetResponse`;
+                document.head.appendChild(script);
+                
+                // Função para receber resposta
+                window.handleSheetResponse = function(data) {
+                    console.log('Enviado para planilha:', data);
+                    document.head.removeChild(script);
+        };
             
         // Log local também
             console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
