@@ -717,9 +717,8 @@
                 submitBtn.disabled = false;
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
-                // INTEGRAÇÃO COM GOOGLE SHEETS
               // INTEGRAÇÃO COM GOOGLE SHEETS
-                let contador = 31; // Altere esse valor pelo número real de inscrições
+                let contador = 1; // Altere esse valor pelo número real de inscrições
                 
                 const dadosSheet = {
                   nome: dados.nome,
@@ -746,7 +745,7 @@
                 
                 const params = new URLSearchParams(dadosSheet);
                 const script = document.createElement('script');
-                script.src = `https://script.google.com/macros/s/AKfyc.../exec?${params.toString()}`;
+                script.src = `https://script.google.com/macros/s/AKfycbxaqiZOGNSOxrK7urm-pPoEfbyriFCT125U3abqQ120Nb3CFDJ1bXf8eB1irdQuWn7T/exec?${params.toString()}`;
                 document.head.appendChild(script);
                 
                 window.handleSheetResponse = function (data) {
