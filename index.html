@@ -557,18 +557,38 @@
                 document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
 
                 // Dados para o organizador (console)
-                console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
-                    nome: dados.nome,
-                    whatsapp: dados.whatsapp,
-                    participacao: dados.participacao,
-                    corRede: dados['cor-rede'],
-                    statusPagamento: dados.pagamento,
-                    valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
-                    formaPagamento: dados['forma-pagamento'],
-                    timestamp: new Date().toLocaleString('pt-BR'),
-                    valorTotal: 'R$ 520,00',
-                    saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
-                });
+               // Enviar para Google Sheets
+const dadosSheet = {
+    nome: dados.nome,
+    whatsapp: dados.whatsapp,
+    participacao: dados.participacao,
+    corRede: dados['cor-rede'],
+    statusPagamento: dados.pagamento,
+    valorPago: dados['valor-pago'] || '',
+    formaPagamento: dados['forma-pagamento']
+};
+
+fetch('https://script.google.com/macros/s/AKfycby-qYR6KR0nkOtNa6ldsz5pMWSKRcnJ9Yl86LIh-T0N_nYE-EXrVhzz7K2guansWCUp/exec', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(dadosSheet)
+}).then(response => response.json())
+.then(data => console.log('Enviado para planilha:', data))
+.catch(error => console.log('Erro:', error));
+
+// Log local também
+console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
+    nome: dados.nome,
+    whatsapp: dados.whatsapp,
+    participacao: dados.participacao,
+    corRede: dados['cor-rede'],
+    statusPagamento: dados.pagamento,
+    valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
+    formaPagamento: dados['forma-pagamento'],
+    timestamp: new Date().toLocaleString('pt-BR'),
+    valorTotal: 'R$ 520,00',
+    saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
+});
 
             }, 1500);
         });
