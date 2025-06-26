@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Retiro dos Homens - Inscrições</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .header {
+            background: #000;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #333;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(1.1);
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .header .date {
+            font-size: 1.3em;
+            color: #ff6b35;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            color: #ccc;
+        }
+
+        .form-container {
+            padding: 40px;
+            background: #111;
+        }
+
+        .counter {
+            text-align: center;
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #222;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        .counter-number {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #fff;
+            font-size: 1.1em;
+        }
+
+        .required {
+            color: #ff6b35;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #222;
+            color: #fff;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: #333;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23999' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 45px;
+        }
+
+        select option {
+            background: #222;
+            color: #fff;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff6b35 0%, #ff8a5b 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #1a472a;
+            color: #4ade80;
+            border: 1px solid #16a34a;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #1a1a2e;
+            border-left: 4px solid #ff6b35;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            color: #ccc;
+        }
+
+        .color-legend {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .color-legend h4 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .color-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid #555;
+        }
+
+        .color-dot.branca { background: #fff; }
+        .color-dot.azul { background: #3b82f6; }
+        .color-dot.amarela { background: #eab308; }
+        .color-dot.vermelha { background: #ef4444; }
+        .color-dot.verde { background: #22c55e; }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+
+            .logo {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <!-- LOGO ALVO CHURCH - SUBSTITUA PELO LINK DA SUA IMAGEM -->
+            <div class="logo-container">
+                <svg width="150" height="150" viewBox="0 0 200 200" class="logo">
+                    <rect width="200" height="200" fill="#000" rx="20"/>
+                    <!-- Círculo com ponto central (símbolo do alvo) -->
+                    <circle cx="100" cy="80" r="25" fill="none" stroke="#fff" stroke-width="3"/>
+                    <circle cx="100" cy="80" r="8" fill="#fff"/>
+                    <!-- Texto ALVO -->
+                    <text x="100" y="130" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">ALVO</text>
+                    <!-- Texto CHURCH -->
+                    <text x="100" y="150" font-family="Arial, sans-serif" font-size="12" font-weight="normal" fill="#fff" text-anchor="middle" letter-spacing="2px">CHURCH</text>
+                </svg>
+            </div>
+            
+            <!-- 
+            ⚠️ IMPORTANTE: SUBSTITUA PELA SUA LOGO REAL!
+            
+            MÉTODO MAIS FÁCIL:
+            1. Faça upload da sua logo para https://imgur.com
+            2. Clique com botão direito na imagem → "Copiar endereço da imagem"
+            3. Substitua todo o bloco <div class="logo-container">...</div> acima por:
+               <img src="LINK_DA_SUA_IMAGEM_AQUI" alt="Alvo Church Logo" class="logo">
+            
+            EXEMPLO:
+            <img src="https://i.imgur.com/EXEMPLO123.png" alt="Alvo Church Logo" class="logo">
+            -->
+            
+            <div class="date">8, 9 e 10 de Agosto</div>
+            <h1>O Retiro dos Homens</h1>
+            <div class="subtitle">Transformação • Comunhão • Propósito</div>
+        </div>
+
+        <div class="form-container">
+            <div class="counter">
+                📊 <span class="counter-number" id="inscricoes-count">12</span> homens já se inscreveram
+            </div>
+
+            <div class="info-box">
+                <strong>🎯 Inscrição Rápida:</strong> Preencha os dados essenciais. A confirmação será feita via WhatsApp com todas as informações detalhadas.
+            </div>
+
+            <div class="info-box">
+                <strong>💰 Informações de Pagamento:</strong><br>
+                • <strong>Valor Total:</strong> R$ 520,00<br>
+                • <strong>Entrada para Pré-Inscrição:</strong> R$ 200,00<br>
+                • <strong>Saldo Restante:</strong> R$ 320,00 (até o dia do retiro)
+            </div>
+
+            <div class="success-message" id="success-message">
+                🙌 <strong>Pré-inscrição realizada com sucesso!</strong><br>
+                <div id="payment-instructions" style="margin-top: 10px; padding: 10px; background: #333; border-radius: 5px;">
+                    <strong>📋 Próximos Passos:</strong><br>
+                    <span id="next-steps"></span>
+                </div>
+            </div>
+
+            <form id="inscricao-form">
+                <div class="form-group">
+                    <label for="nome">Nome Completo <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp <span class="required">*</span></label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="participacao">Vai Receber ou Servir? <span class="required">*</span></label>
+                    <select id="participacao" name="participacao" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="receber">Vou Receber</option>
+                        <option value="servir">Vou Servir</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="color-legend">
+                        <h4>Referência das Cores das Redes:</h4>
+                        <div class="color-list">
+                            <div class="color-item">
+                                <div class="color-dot branca"></div>
+                                <span>Branca</span>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-dot azul"></div>
+                                <span>Azul</span>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-dot amarela"></div>
+                                <span>Amarela</span>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-dot vermelha"></div>
+                                <span>Vermelha</span>
+                            </div>
+                            <div class="color-item">
+                                <div class="color-dot verde"></div>
+                                <span>Verde</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <label for="cor-rede">Cor da Rede <span class="required">*</span></label>
+                    <select id="cor-rede" name="cor-rede" required>
+                        <option value="">Selecione a cor da sua rede</option>
+                        <option value="branca">🤍 Rede Branca</option>
+                        <option value="azul">💙 Rede Azul</option>
+                        <option value="amarela">💛 Rede Amarela</option>
+                        <option value="vermelha">❤️ Rede Vermelha</option>
+                        <option value="verde">💚 Rede Verde</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pagamento">Status do Pagamento da Entrada <span class="required">*</span></label>
+                    <select id="pagamento" name="pagamento" required>
+                        <option value="">Selecione o status do pagamento</option>
+                        <option value="entrada-pre">💰 Entrada Pré Inscrição (R$ 200,00 +)</option>
+                        <option value="pagar-diferenca">📅 Pagar diferença</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="valor-group" style="display: none;">
+                    <label for="valor-pago">Valor que será pago <span class="required">*</span></label>
+                    <div style="position: relative;">
+                        <input type="text" id="valor-pago" name="valor-pago" placeholder="200,00" style="padding-left: 40px;">
+                        <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #ccc; font-weight: bold;">R$</span>
+                    </div>
+                    <div id="valor-warning" style="display: none; background: #660000; border: 1px solid #cc0000; color: #ff6666; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                        ⚠️ <strong>Atenção:</strong> O valor mínimo da pré-inscrição é R$ 200,00
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="forma-pagamento">Como prefere pagar a entrada? <span class="required">*</span></label>
+                    <select id="forma-pagamento" name="forma-pagamento" required>
+                        <option value="">Selecione a forma de pagamento</option>
+                        <option value="pix">🏦 PIX</option>
+                        <option value="dinheiro">💵 Dinheiro</option>
+                        <option value="cartao">💳 Cartão</option>
+                        <option value="transferencia">🏧 Transferência</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    Confirmar Inscrição
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let inscricoes = [];
+
+        // Simular algumas inscrições já existentes
+        inscricoes = Array(12).fill(null).map((_, i) => ({
+            id: i + 1,
+            nome: `Participante ${i + 1}`,
+            timestamp: new Date()
+        }));
+
+        function atualizarContador() {
+            const totalInscricoes = inscricoes.length;
+            const inscricoesCount = document.getElementById('inscricoes-count');
+            inscricoesCount.textContent = totalInscricoes;
+        }
+
+        function formatarWhatsApp(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length >= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 7) {
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+            }
+            input.value = value;
+        }
+
+        function formatarValor(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length >= 3) {
+                value = value.replace(/(\d+)(\d{2})$/, '$1,$2');
+            }
+            input.value = value;
+        }
+
+        function validarValorMinimo() {
+            const pagamento = document.getElementById('pagamento').value;
+            const valorInput = document.getElementById('valor-pago');
+            const warning = document.getElementById('valor-warning');
+            
+            if (pagamento === 'entrada-pre' && valorInput.value) {
+                const valor = parseFloat(valorInput.value.replace(',', '.'));
+                if (valor < 200) {
+                    warning.style.display = 'block';
+                } else {
+                    warning.style.display = 'none';
+                }
+            } else {
+                warning.style.display = 'none';
+            }
+        }
+
+        document.getElementById('pagamento').addEventListener('change', function() {
+            const valorGroup = document.getElementById('valor-group');
+            const valorInput = document.getElementById('valor-pago');
+            
+            if (this.value) {
+                valorGroup.style.display = 'block';
+                valorInput.required = true;
+                
+                // Sugerir valor baseado na opção
+                if (this.value === 'entrada-pre') {
+                    valorInput.placeholder = '200,00';
+                } else if (this.value === 'pagar-diferenca') {
+                    valorInput.placeholder = '320,00';
+                }
+            } else {
+                valorGroup.style.display = 'none';
+                valorInput.required = false;
+            }
+            
+            validarValorMinimo();
+        });
+
+        document.getElementById('valor-pago').addEventListener('input', function() {
+            formatarValor(this);
+            validarValorMinimo();
+        });
+
+        document.getElementById('whatsapp').addEventListener('input', function() {
+            formatarWhatsApp(this);
+        });
+
+        document.getElementById('inscricao-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const dados = Object.fromEntries(formData);
+            
+            // Validações básicas
+            if (!dados.nome || !dados.whatsapp || !dados.participacao || !dados['cor-rede'] || !dados.pagamento || !dados['forma-pagamento']) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Validar valor quando necessário
+            if (dados.pagamento && !dados['valor-pago']) {
+                alert('Por favor, informe o valor que será pago.');
+                return;
+            }
+
+            // Validar valor mínimo para entrada de pré-inscrição
+            if (dados.pagamento === 'entrada-pre') {
+                const valor = parseFloat(dados['valor-pago'].replace(',', '.'));
+                if (valor < 200) {
+                    alert('O valor mínimo da pré-inscrição é R$ 200,00');
+                    return;
+                }
+            }
+
+            // Simular envio
+            const submitBtn = document.getElementById('submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Adicionar à lista
+                inscricoes.push({
+                    id: Date.now(),
+                    ...dados,
+                    timestamp: new Date()
+                });
+
+                // Mostrar mensagem de sucesso
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Instruções específicas baseadas no pagamento
+                const nextSteps = document.getElementById('next-steps');
+                const valorPago = dados['valor-pago'] ? parseFloat(dados['valor-pago'].replace(',', '.')) : 0;
+                const saldoRestante = 520 - valorPago;
+                
+                if (dados.pagamento === 'entrada-pre') {
+                    nextSteps.innerHTML = `💰 Você pagará R$ ${dados['valor-pago']} como entrada. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp com os dados para pagamento!`;
+                } else if (dados.pagamento === 'pagar-diferenca') {
+                    nextSteps.innerHTML = `📅 Você pagará R$ ${dados['valor-pago']} como diferença. Saldo restante: R$ ${saldoRestante.toFixed(2).replace('.', ',')}. Entraremos em contato via WhatsApp!`;
+                }
+                
+                // Limpar formulário
+                this.reset();
+                
+                // Atualizar contador
+                atualizarContador();
+                
+                // Restaurar botão
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+
+                // Scroll para o topo
+                document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+
+                // Dados para o organizador (console)
+                console.log('🔥 Nova Inscrição - O Retiro dos Homens:', {
+                    nome: dados.nome,
+                    whatsapp: dados.whatsapp,
+                    participacao: dados.participacao,
+                    corRede: dados['cor-rede'],
+                    statusPagamento: dados.pagamento,
+                    valorPago: dados['valor-pago'] ? `R$ ${dados['valor-pago']}` : 'Não informado',
+                    formaPagamento: dados['forma-pagamento'],
+                    timestamp: new Date().toLocaleString('pt-BR'),
+                    valorTotal: 'R$ 520,00',
+                    saldoRestante: dados['valor-pago'] ? `R$ ${(520 - parseFloat(dados['valor-pago'].replace(',', '.'))).toFixed(2).replace('.', ',')}` : 'R$ 520,00'
+                });
+
+            }, 1500);
+        });
+
+        // Inicializar contador
+        atualizarContador();
+
+        // Simular chegada de novas inscrições (para demonstração)
+        setInterval(() => {
+            if (Math.random() < 0.08) {
+                inscricoes.push({
+                    id: Date.now(),
+                    nome: `Novo Inscrito ${inscricoes.length + 1}`,
+                    timestamp: new Date()
+                });
+                atualizarContador();
+            }
+        }, 15000);
+    </script>
+</body>
+</html>
